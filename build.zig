@@ -259,14 +259,10 @@ pub fn build(b: *std.Build) void {
     });
     z.linkLibC();
 
-    const dirent = b.addStaticLibrary(.{
-        .name = "dirent",
-        .optimize = optimize,
+    const dirent = b.dependency("dirent", .{
         .target = target,
+        .optimize = optimize,
     });
-    dirent.addLibraryPath(.{ .path = "dirent/include" });
-    dirent.linkLibC();
-    dirent.addCSourceFile(.{ .file = .{ .path = "dirent/examples/foo.c" }, .flags = &.{} });
 
     const storm = b.addStaticLibrary(.{
         .name = "storm",
@@ -317,7 +313,7 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
     mpq_extractor.addCSourceFile(.{ .file = .{ .path = "main.cpp" }, .flags = &.{} });
-    mpq_extractor.linkLibrary(dirent);
+    mpq_extractor.linkLibrary(dirent.artifact("dirent"));
     mpq_extractor.linkLibrary(storm);
     mpq_extractor.addIncludePath(.{ .path = "StormLib/src" });
     mpq_extractor.addIncludePath(.{ .path = "include" });

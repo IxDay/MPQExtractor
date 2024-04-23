@@ -1,0 +1,18 @@
+.{
+    // the name of your project
+    .name = "MPQExtractor",
+    // the version of your project
+    .version = "0.0.1",
+
+    .paths = .{""},
+    // the actual packages you need as dependencies of your project
+    .dependencies = .{
+        // the name of the package
+        .dirent = .{
+            // the url to the release of the module
+            .url = "https://github.com/IxDay/dirent/archive/refs/tags/1.23.2.tar.gz",
+            // the hash of the module, this is not the checksum of the tarball
+            .hash = "122017e296ca3e00d96999d3173d88355b95b486af3bb7c4a98cc00750adc3971740",
+        },
+    },
+}
